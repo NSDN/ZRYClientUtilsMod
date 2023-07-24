@@ -1,0 +1,8 @@
+{
+    "key.category.zry_client_utils_mod": "ZRY Client Utils Mod 按键绑定",
+    "key.zry_client_utils_mod.we_panel": "WE助手面板",
+    "gui.zry_client_utils.we_panel.title": "WE助手",
+    "gui.zry_client_utils.we_panel.back": "返回",
+    "gui.zry_client_utils.we_panel.func.name.distr": "选区统计(I)",
+    "gui.zry_client_utils.we_panel.func.name.desel": "取消选择(D)"
+}
