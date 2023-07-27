@@ -1,12 +1,17 @@
 package com.zjinja.mcmod.zry_client_utils_mod.events;
 
+import com.mojang.logging.LogUtils;
 import com.zjinja.mcmod.zry_client_utils_mod.ZRYClientUtilsMod;
+import com.zjinja.mcmod.zry_client_utils_mod.commands.CommandGetWESelPos;
 import com.zjinja.mcmod.zry_client_utils_mod.gui.GuiWEHelpPanel;
 import com.zjinja.mcmod.zry_client_utils_mod.keybinds.KeyBindings;
+import com.zjinja.mcmod.zry_client_utils_mod.networking.NetworkHandlerWECUI;
+import com.zjinja.mcmod.zry_client_utils_mod.utils.ZLogUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.InputEvent;
+import net.minecraftforge.client.event.RegisterClientCommandsEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,14 +25,54 @@ public class ClientEvents {
             var mc = Minecraft.getInstance();
             var player = mc.player;
             if (player == null) {
-                ZRYClientUtilsMod.LOGGER.warn("error in onKeyInput event: player is null.");
+                ZLogUtil.log(
+                        LogUtils.getLogger(), ZLogUtil.Level.WARN,
+                        "key-event", "error in onKeyInput event: player is null."
+                );
                 return;
             }
             if(KeyBindings.KEY_MAPPING_WE_PANEL.consumeClick()){
-                ZRYClientUtilsMod.LOGGER.info("we_panel key pressed.");
+                ZLogUtil.log(
+                        LogUtils.getLogger(), ZLogUtil.Level.INFO,
+                        "key-event", "we_panel key pressed."
+                );
                 mc.setScreen(new GuiWEHelpPanel());
             }
         }
+
+        @SubscribeEvent
+        public static void registerClientCommand(RegisterClientCommandsEvent event) {
+            new CommandGetWESelPos().register(event.getDispatcher());
+        }
+
+        @SubscribeEvent
+        public static void loggedIn(ClientPlayerNetworkEvent.LoggingIn event) {
+            ZLogUtil.log(
+                    LogUtils.getLogger(), ZLogUtil.Level.INFO,
+                    "client-logged-in", "Logged into server."
+            );
+            NetworkHandlerWECUI.onEnterServer();
+        }
+
+        @SubscribeEvent
+        public static void loggedOut(ClientPlayerNetworkEvent.LoggingOut event) {
+            ZLogUtil.log(
+                    LogUtils.getLogger(), ZLogUtil.Level.INFO,
+                    "client-logged-out", "Logged out of server."
+            );
+            NetworkHandlerWECUI.onQuitServer();
+        }
+
+        @SubscribeEvent
+        public static void onGameJoin(GameJ event) {
+            ZLogUtil.log(
+                    LogUtils.getLogger(), ZLogUtil.Level.INFO,
+                    "client-logged-out", "Logged out of server."
+            );
+            NetworkHandlerWECUI.onQuitServer();
+        }
+
+
     }
 
     @Mod.EventBusSubscriber(modid = ZRYClientUtilsMod.MODID, value = Dist.CLIENT, bus=Mod.EventBusSubscriber.Bus.MOD)
@@ -36,7 +81,11 @@ public class ClientEvents {
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             // Some client setup code
-            ZRYClientUtilsMod.LOGGER.info("ZRY Client Utils Mod Loaded.");
+            ZLogUtil.log(
+                    LogUtils.getLogger(), ZLogUtil.Level.INFO,
+                    "client-setup", "ZRY Client Utils Mod Loaded."
+            );
+            NetworkHandlerWECUI.hook();
         }
 
         @SubscribeEvent

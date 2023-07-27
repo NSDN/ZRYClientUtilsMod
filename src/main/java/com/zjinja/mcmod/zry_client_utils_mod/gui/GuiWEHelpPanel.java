@@ -5,7 +5,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.logging.LogUtils;
 import com.zjinja.mcmod.zry_client_utils_mod.ZRYClientUtilsMod;
+import com.zjinja.mcmod.zry_client_utils_mod.utils.ZLogUtil;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
@@ -53,13 +55,11 @@ public class GuiWEHelpPanel extends Screen {
         for (KeyMapping kb : Minecraft.getInstance().options.keyMappings) {
             if (kb.getName().equals("key.zry_client_utils_mod.we_panel")) {
                 this.exitKeyCode = kb.getKey().getValue();
-                ZRYClientUtilsMod.LOGGER.info("WE_PANEL ExitKey: keyname={}, keycode={}", kb.getKey().getName(), kb.getKey().getValue());
             }
         }
         this.loadFunctionListFromJson();
         this.functionAreaMaxX = this.width - 24;
         this.functionAreaMaxY = this.height - 22;
-        ZRYClientUtilsMod.LOGGER.info("Size Of WE_PANEL Screen: w={}, h={}", this.width, this.height);
         {
             Component backText = Component.translatable("gui.zry_client_utils.we_panel.back");
             addRenderableWidget(new Button(
@@ -85,7 +85,10 @@ public class GuiWEHelpPanel extends Screen {
                 wXPos = 24;
             }
             if (wYPos + 20 > this.functionAreaMaxY) {
-                ZRYClientUtilsMod.LOGGER.warn("[{}] Too many function items for WE_PANEL.", ZRYClientUtilsMod.MODID);
+                ZLogUtil.log(
+                        LogUtils.getLogger(), ZLogUtil.Level.WARN,
+                        "gui/we-panel", "Too many function items."
+                );
                 break AddFunctionButtonsLoop;
             }
             Component backText = Component.translatable(i.Name);
@@ -152,16 +155,24 @@ public class GuiWEHelpPanel extends Screen {
                             WEPanelFunctionItem ni = new WEPanelFunctionItem(name, command, keyCode);
                             this.functionList.add(ni);
                         }else{
-                            ZRYClientUtilsMod.LOGGER.warn("WE_PANEL failed load function: unexpected type in json.");
+                            ZLogUtil.log(
+                                    LogUtils.getLogger(), ZLogUtil.Level.WARN,
+                                    "gui/we-panel", "failed load function: unexpected type in json."
+                            );
                         }
                     }
                 }
             }catch (Exception e) {
-                ZRYClientUtilsMod.LOGGER.error("WE_PANEL failed load resource {}: {}", this.functionList, e);
+                ZLogUtil.log(
+                        LogUtils.getLogger(), ZLogUtil.Level.ERROR,
+                        "gui/we-panel", "failed load resource.", e
+                );
             }
         }else {
-            ZRYClientUtilsMod.LOGGER.error("WE_PANEL failed load resource {}: not found.", this.functionList);
-
+            ZLogUtil.log(
+                    LogUtils.getLogger(), ZLogUtil.Level.ERROR,
+                    "gui/we-panel", "failed load resource: not found."
+            );
         }
     }
 
@@ -184,7 +195,6 @@ public class GuiWEHelpPanel extends Screen {
 
     @Override
     public boolean keyPressed(int keycode, int param1, int modkey){
-        ZRYClientUtilsMod.LOGGER.debug("KeyPressed on WE_PANEL: keycode={}, p1={}, p2={}", keycode, param1, modkey);
         if( modkey == 0) {
             if (keycode == this.exitKeyCode) {
                 this.closePanel();

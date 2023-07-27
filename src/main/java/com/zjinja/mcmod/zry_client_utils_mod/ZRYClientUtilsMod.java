@@ -1,6 +1,8 @@
 package com.zjinja.mcmod.zry_client_utils_mod;
 
 import com.mojang.logging.LogUtils;
+import com.zjinja.mcmod.zry_client_utils_mod.networking.NetworkHandlerWECUI;
+import com.zjinja.mcmod.zry_client_utils_mod.utils.ZLogUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -19,7 +21,7 @@ public class ZRYClientUtilsMod
     // Define mod id in a common place for everything to reference
     public static final String MODID = "zry_client_utils_mod";
     // Directly reference a slf4j logger
-    public static final Logger LOGGER = LogUtils.getLogger();
+    //public static final Logger LOGGER = LogUtils.getLogger();
 
     public ZRYClientUtilsMod()
     {
@@ -39,7 +41,8 @@ public class ZRYClientUtilsMod
 
     private void modSetup(final FMLCommonSetupEvent event)
     {
-        LOGGER.info("ZRY Client Utils Mod Setup...");
+        ZLogUtil.log(LogUtils.getLogger(), ZLogUtil.Level.INFO,"mod-setup", "ZRY Client Utils Mod Setup...");
+        //NetworkHandlerWECUI.hook();
     }
 
 }

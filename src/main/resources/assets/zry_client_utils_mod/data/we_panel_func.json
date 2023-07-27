@@ -8,5 +8,10 @@
         "name": "gui.zry_client_utils.we_panel.func.name.distr",
         "command": "/distr",
         "keybind": 73
+    },
+    {
+        "name": "TEST",
+        "command": "get-we-sel-pos",
+        "keybind": 0
     }
 ]

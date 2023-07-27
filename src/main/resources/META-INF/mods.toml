@@ -29,7 +29,11 @@ displayName="ZRY Client Utils Mod" #mandatory
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="zry_client_utils_mod.png" #optional
 # A text field displayed in the mod UI
-credits="" #optional
+credits='''
+Some of code copied from https://github.com/irtimaled/BoundingBoxOutlineReloaded
+Some of code inspired by https://github.com/EngineHub/WorldEditCUI
+Thanks to https://github.com/EngineHub/WorldEdit providing such good mod
+'''
 # A text field displayed in the mod UI
 authors="ZRY" #optional
 # Display Test controls the display for your mod in the server connection screen

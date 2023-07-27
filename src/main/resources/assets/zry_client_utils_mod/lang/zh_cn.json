@@ -1,6 +1,10 @@
 {
     "key.category.zry_client_utils_mod": "ZRY Client Utils Mod 按键绑定",
     "key.zry_client_utils_mod.we_panel": "WE助手面板",
+    "chat.tip.not_support_this_wecui_type": "[ZRYClientUtilsMod] 当前不支持对该类型WorldEdit选区可视化。",
+    "chat.tip.not_support_l2": "您可以忽略可视化效果，依靠想象力操作。否则建议清空选区重新选择，以免误导。",
+    "chat.tip.not_support_polygon_yet": "[ZRYClientUtilsMod] 当前版本不支持对Polygon类型WorldEdit选区可视化。",
+    "chat.tip.not_support_polyhedron_yet": "[ZRYClientUtilsMod] 当前版本不支持对Polyhedron类型WorldEdit选区可视化。",
     "gui.zry_client_utils.we_panel.title": "WE助手",
     "gui.zry_client_utils.we_panel.back": "返回",
     "gui.zry_client_utils.we_panel.func.name.distr": "选区统计(I)",
