@@ -2,6 +2,7 @@ package com.zjinja.mcmod.zry_client_utils_mod.cui;
 
 import com.mojang.brigadier.Command;
 import com.mojang.logging.LogUtils;
+import com.zjinja.mcmod.zry_client_utils_mod.renderer.RenderContext;
 import com.zjinja.mcmod.zry_client_utils_mod.utils.ZLogUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -343,6 +344,20 @@ public class CUIRegionManager {
             return false;
         }else{
             return true;
+        }
+    }
+
+    public static void render(RenderContext rctx) {
+        var inst = getInstance();
+        if (inst != null) {
+            if(inst.selRegion != null) {
+                inst.selRegion.render(rctx, true);
+            }
+            if (inst.regions != null) {
+                for (IRegion ir : inst.regions.values()) {
+                    ir.render(rctx, false);
+                }
+            }
         }
     }
 }

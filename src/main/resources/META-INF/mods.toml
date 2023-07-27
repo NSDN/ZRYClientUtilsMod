@@ -30,7 +30,6 @@ displayName="ZRY Client Utils Mod" #mandatory
 logoFile="zry_client_utils_mod.png" #optional
 # A text field displayed in the mod UI
 credits='''
-Some of code copied from https://github.com/irtimaled/BoundingBoxOutlineReloaded
 Some of code inspired by https://github.com/EngineHub/WorldEditCUI
 Thanks to https://github.com/EngineHub/WorldEdit providing such good mod
 '''

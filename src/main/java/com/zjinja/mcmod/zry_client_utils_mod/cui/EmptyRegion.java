@@ -1,6 +1,7 @@
 package com.zjinja.mcmod.zry_client_utils_mod.cui;
 
 import com.mojang.logging.LogUtils;
+import com.zjinja.mcmod.zry_client_utils_mod.renderer.RenderContext;
 import com.zjinja.mcmod.zry_client_utils_mod.utils.ZLogUtil;
 
 public class EmptyRegion implements IRegion {
@@ -68,5 +69,9 @@ public class EmptyRegion implements IRegion {
                 LogUtils.getLogger(), ZLogUtil.Level.WARN,
                 "wecui/update", "updatePolygon not supported for '{}'", this.describe()
         );
+    }
+
+    @Override
+    public void render(RenderContext rctx, boolean mainSelection) {
     }
 }

@@ -1,5 +1,7 @@
 package com.zjinja.mcmod.zry_client_utils_mod.cui;
 
+import com.zjinja.mcmod.zry_client_utils_mod.renderer.RenderContext;
+
 public interface IRegion {
     public String describe();
     public CUIRegionManager.RegionType getType();
@@ -10,4 +12,5 @@ public interface IRegion {
     public void updateCylinder(int x, int y, int z, double rx, double rz);
     public void updateMinMax(int min, int max);
     public void updatePolygon(int[] vid);
+    public void render(RenderContext rctx, boolean mainSelection);
 }

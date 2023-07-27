@@ -1,18 +1,23 @@
 package com.zjinja.mcmod.zry_client_utils_mod.events;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.logging.LogUtils;
 import com.zjinja.mcmod.zry_client_utils_mod.ZRYClientUtilsMod;
 import com.zjinja.mcmod.zry_client_utils_mod.commands.CommandGetWESelPos;
+import com.zjinja.mcmod.zry_client_utils_mod.cui.CUIRegionManager;
 import com.zjinja.mcmod.zry_client_utils_mod.gui.GuiWEHelpPanel;
 import com.zjinja.mcmod.zry_client_utils_mod.keybinds.KeyBindings;
 import com.zjinja.mcmod.zry_client_utils_mod.networking.NetworkHandlerWECUI;
+import com.zjinja.mcmod.zry_client_utils_mod.renderer.RenderContext;
 import com.zjinja.mcmod.zry_client_utils_mod.utils.ZLogUtil;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
-import net.minecraftforge.client.event.InputEvent;
-import net.minecraftforge.client.event.RegisterClientCommandsEvent;
-import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -64,12 +69,14 @@ public class ClientEvents {
         }
 
         @SubscribeEvent
-        public static void onGameJoin(GameJ event) {
-            ZLogUtil.log(
-                    LogUtils.getLogger(), ZLogUtil.Level.INFO,
-                    "client-logged-out", "Logged out of server."
-            );
-            NetworkHandlerWECUI.onQuitServer();
+        public static void onRenderLevel(RenderLevelStageEvent event) {
+            //if(event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_CUTOUT_MIPPED_BLOCKS_BLOCKS)) {
+            if(true) {
+                LevelRenderer lr = event.getLevelRenderer();
+                PoseStack ps = event.getPoseStack();
+                RenderContext rctx = new RenderContext(ps);
+                CUIRegionManager.render(rctx);
+            }
         }
 
 
