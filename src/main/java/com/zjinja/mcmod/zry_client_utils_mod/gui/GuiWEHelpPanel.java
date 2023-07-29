@@ -1,44 +1,21 @@
 package com.zjinja.mcmod.zry_client_utils_mod.gui;
 
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.logging.LogUtils;
-import com.zjinja.mcmod.zry_client_utils_mod.ZRYClientUtilsMod;
+import com.zjinja.mcmod.zry_client_utils_mod.keybinds.KeyCodeTranslate;
+import com.zjinja.mcmod.zry_client_utils_mod.utils.ConfigMgr;
 import com.zjinja.mcmod.zry_client_utils_mod.utils.ZLogUtil;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import org.lwjgl.glfw.GLFW;
-
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GuiWEHelpPanel extends Screen {
-    public static class WEPanelFunctionItem {
-        public String Name;
-        public String Command;
-        public int KeyCode;
-
-        public WEPanelFunctionItem(String name, String command, int keycode) {
-            this.Name = name;
-            this.Command = command;
-            this.KeyCode = keycode;
-        }
-    }
-
-    private static Gson GSON = new Gson();
-
-    private ArrayList<WEPanelFunctionItem> functionList = new ArrayList<>();
-    private HashMap<Integer, String> functionShortcutKeys = new HashMap<>();
-    private int eachFunctionButtonWidth = 54;
+    private final HashMap<Integer, String> functionShortcutKeys = new HashMap<>();
     private int functionAreaMaxX;
     private int functionAreaMaxY;
 
@@ -57,7 +34,6 @@ public class GuiWEHelpPanel extends Screen {
                 this.exitKeyCode = kb.getKey().getValue();
             }
         }
-        this.loadFunctionListFromJson();
         this.functionAreaMaxX = this.width - 24;
         this.functionAreaMaxY = this.height - 22;
         {
@@ -78,9 +54,20 @@ public class GuiWEHelpPanel extends Screen {
             {});
         }
         int wXPos = 24, wYPos = 32;
+        var cfgm = ConfigMgr.getInstance();
+        ConfigMgr.WEPanelFunctionItem[] flist;
+        if(cfgm != null){
+            flist = cfgm.getWEPanelFunctionList();
+        }else{
+            ZLogUtil.log(
+                    LogUtils.getLogger(), ZLogUtil.Level.WARN,
+                    "gui/we-panel", "Failed get ConfigMgr: is null."
+            );
+            flist = new ConfigMgr.WEPanelFunctionItem[0];
+        }
         AddFunctionButtonsLoop:
-        for(WEPanelFunctionItem i : this.functionList) {
-            if(wXPos + this.eachFunctionButtonWidth > this.functionAreaMaxX) {
+        for(ConfigMgr.WEPanelFunctionItem i : flist) {
+            if(wXPos + i.Width > this.functionAreaMaxX) {
                 wYPos += 20;
                 wXPos = 24;
             }
@@ -91,11 +78,35 @@ public class GuiWEHelpPanel extends Screen {
                 );
                 break AddFunctionButtonsLoop;
             }
-            Component backText = Component.translatable(i.Name);
+            String keyTip;
+            if(i.KeyCode > 0) {
+                String rKeyTip = KeyCodeTranslate.getKeyNameByKeyCode(i.KeyCode);
+                if(rKeyTip.equals("")){
+                    keyTip = " (<?>)";
+                }else{
+                    keyTip = String.format(" (%s)", rKeyTip);
+                }
+            }else{
+                keyTip = "";
+            }
+            Component backText;
+            if(i.WillTranslate){
+                if(keyTip.equals("")){
+                    backText = Component.translatable(i.Name);
+                }else{
+                    backText = Component.translatable(i.Name).append(Component.literal(keyTip));
+                }
+            }else{
+                if(keyTip.equals("")){
+                    backText = Component.literal(i.Name);
+                }else{
+                    backText = Component.literal(i.Name).append(Component.literal(keyTip));
+                }
+            }
             addRenderableWidget(new Button(
                     wXPos,
                     wYPos,
-                    this.eachFunctionButtonWidth,
+                    i.Width,
                     20,
                     backText,
                     button -> {
@@ -109,70 +120,7 @@ public class GuiWEHelpPanel extends Screen {
             if(i.KeyCode > 0) {
                 this.functionShortcutKeys.put(i.KeyCode, i.Command);
             }
-            wXPos += this.eachFunctionButtonWidth;
-        }
-    }
-
-    public void loadFunctionListFromJson() {
-        var resLoc = new ResourceLocation(ZRYClientUtilsMod.MODID, this.funcListJsonUri);
-        var fljson = Minecraft.getInstance().getResourceManager().getResource(resLoc);
-        if(fljson.isPresent()) {
-            try(var file = fljson.get().open()){
-                try(var isr = new InputStreamReader(file, StandardCharsets.UTF_8)){
-                    JsonArray jsonArray = GSON.fromJson(isr, JsonArray.class);
-                    AddElemLoop:
-                    for(JsonElement ji: jsonArray) {
-                        var jo = ji.getAsJsonObject();
-                        if(jo != null) {
-                            String name = "";
-                            String command = "";
-                            int keyCode = 0;
-                            var rawName = jo.getAsJsonPrimitive("name");
-                            if(rawName != null) {
-                                name = rawName.getAsString();
-                                if(name.equals("")){
-                                    continue AddElemLoop;
-                                }
-                            }else{
-                                continue AddElemLoop;
-                            }
-                            var cmd = jo.getAsJsonPrimitive("command");
-                            if (cmd != null) {
-                                command = cmd.getAsString();
-                                if(command.equals("")){
-                                    continue AddElemLoop;
-                                }
-                            }else {
-                                continue AddElemLoop;
-                            }
-                            var rawKeycode = jo.getAsJsonPrimitive("keybind");
-                            if(rawKeycode != null){
-                                keyCode = rawKeycode.getAsInt();
-                                if(keyCode < 0) {
-                                    keyCode = 0;
-                                }
-                            }
-                            WEPanelFunctionItem ni = new WEPanelFunctionItem(name, command, keyCode);
-                            this.functionList.add(ni);
-                        }else{
-                            ZLogUtil.log(
-                                    LogUtils.getLogger(), ZLogUtil.Level.WARN,
-                                    "gui/we-panel", "failed load function: unexpected type in json."
-                            );
-                        }
-                    }
-                }
-            }catch (Exception e) {
-                ZLogUtil.log(
-                        LogUtils.getLogger(), ZLogUtil.Level.ERROR,
-                        "gui/we-panel", "failed load resource.", e
-                );
-            }
-        }else {
-            ZLogUtil.log(
-                    LogUtils.getLogger(), ZLogUtil.Level.ERROR,
-                    "gui/we-panel", "failed load resource: not found."
-            );
+            wXPos += i.Width;
         }
     }
 

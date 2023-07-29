@@ -14,56 +14,21 @@ public class ZLogUtil {
         ERROR,
     }
 
+    public static Level modLogLevelFilter = Level.INFO;
+
     public static boolean checkLevel(Logger logger, Level level) {
-        switch (level){
-            case TRACE -> {
-                if(logger.isTraceEnabled()){
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-            case DEBUG -> {
-                if(logger.isDebugEnabled()){
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-            case INFO -> {
-                if(logger.isInfoEnabled()){
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-            case WARN -> {
-                if(logger.isWarnEnabled()){
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-            case ERROR -> {
-                if(logger.isErrorEnabled()){
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-        }
-        return false;
+        return level.compareTo(modLogLevelFilter) >= 0;
     }
 
     private static void doLog(Logger logger, Level level, String module, String msg, Throwable throwable) {
         var emsg = MessageFormatter.arrayFormat(
-                "[{}/{}]: {}",
-                new Object[]{ ZRYClientUtilsMod.MODID, module, msg},
+                "[{}|{}/{}]: {}",
+                new Object[]{ level.toString(), ZRYClientUtilsMod.MODID, module, msg},
                 throwable
         ).getMessage();
         switch (level){
-            case TRACE -> logger.trace(emsg);
-            case DEBUG -> logger.debug(emsg);
+            case TRACE -> logger.info(emsg);
+            case DEBUG -> logger.info(emsg);
             case INFO -> logger.info(emsg);
             case WARN -> logger.warn(emsg);
             case ERROR -> logger.error(emsg);

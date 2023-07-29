@@ -5,8 +5,11 @@
     "chat.tip.not_support_l2": "您可以忽略可视化效果，依靠想象力操作。否则建议清空选区重新选择，以免误导。",
     "chat.tip.not_support_polygon_yet": "[ZRYClientUtilsMod] 当前版本不支持对Polygon类型WorldEdit选区可视化。",
     "chat.tip.not_support_polyhedron_yet": "[ZRYClientUtilsMod] 当前版本不支持对Polyhedron类型WorldEdit选区可视化。",
+    "chat.tip.reload_config_ok": "[ZRYClientUtilsMod] 配置文件已重新载入",
+    "chat.tip.reload_config_fail": "[ZRYClientUtilsMod] 重新载入配置文件失败，详细信息请查看日志。",
     "gui.zry_client_utils.we_panel.title": "WE助手",
     "gui.zry_client_utils.we_panel.back": "返回",
-    "gui.zry_client_utils.we_panel.func.name.distr": "选区统计(I)",
-    "gui.zry_client_utils.we_panel.func.name.desel": "取消选择(D)"
+    "gui.zry_client_utils.we_panel.func.name.distr": "选区统计",
+    "gui.zry_client_utils.we_panel.func.name.desel": "取消选择",
+    "gui.zry_client_utils.we_panel.func.name.clear": "清空选区"
 }
