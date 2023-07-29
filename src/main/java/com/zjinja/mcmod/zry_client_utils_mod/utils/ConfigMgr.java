@@ -214,8 +214,8 @@ public class ConfigMgr {
                 keyBind = 0;
             }
             Integer width = i.getOrElse("width", this.WEPanelFunctionDefaultButtonWidth);
-            if(keyBind <= 0) {
-                keyBind = this.WEPanelFunctionDefaultButtonWidth;
+            if(width <= 0) {
+                width = this.WEPanelFunctionDefaultButtonWidth;
             }
             Boolean isClientCommand = i.getOrElse("clientCmd", false);
             WEPanelFunctionItem pfi = new WEPanelFunctionItem(name, willTranslate, command, keyBind, width, isClientCommand);

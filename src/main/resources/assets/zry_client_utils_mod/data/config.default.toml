@@ -94,118 +94,46 @@ keybind = 61
 width = 56
 
 [[we_panel.item]]
-name = "gui.zry_client_utils.we_panel.func.name.tomark"
-willTranslate = true
-command = "zcu-marker from-we"
-keybind = 77
-width = 56
-clientCmd = true
-
-[[we_panel.item]]
-name = "gui.zry_client_utils.we_panel.func.name.clmark"
-willTranslate = true
-command = "zcu-marker clear"
-keybind = 78
-width = 56
-clientCmd = true
-
-[[we_panel.item]]
-name = "gui.zry_client_utils.we_panel.func.name.outset"
-willTranslate = true
-command = "/outset 1"
-keybind = 334
-width = 56
-
-[[we_panel.item]]
-name = "gui.zry_client_utils.we_panel.func.name.inset"
-willTranslate = true
-command = "/inset 1"
-keybind = 333
-width = 56
-
-[[we_panel.item]]
-name = "gui.zry_client_utils.we_panel.func.name.st1nor"
-willTranslate = true
-command = "/stack 1 north"
-keybind = 328
-width = 56
-
-[[we_panel.item]]
-name = "gui.zry_client_utils.we_panel.func.name.st1sou"
-willTranslate = true
-command = "/stack 1 south"
-keybind = 322
-width = 56
-
-[[we_panel.item]]
-name = "gui.zry_client_utils.we_panel.func.name.st1we"
-willTranslate = true
-command = "/stack 1 west"
-keybind = 324
-width = 56
-
-[[we_panel.item]]
-name = "gui.zry_client_utils.we_panel.func.name.st1ea"
-willTranslate = true
-command = "/stack 1 east"
-keybind = 326
-width = 56
-
-[[we_panel.item]]
-name = "gui.zry_client_utils.we_panel.func.name.st1up"
-willTranslate = true
-command = "/stack 1 up"
-keybind = 332
-width = 56
-
-[[we_panel.item]]
-name = "gui.zry_client_utils.we_panel.func.name.st1dn"
-willTranslate = true
-command = "/stack 1 down"
-keybind = 331
-width = 56
-
-[[we_panel.item]]
 name = "gui.zry_client_utils.we_panel.func.name.sh1nor"
 willTranslate = true
 command = "/shift 1 north"
 keybind = 265
-width = 56
+width = 64
 
 [[we_panel.item]]
 name = "gui.zry_client_utils.we_panel.func.name.sh1sou"
 willTranslate = true
 command = "/shift 1 south"
 keybind = 264
-width = 56
+width = 64
 
 [[we_panel.item]]
 name = "gui.zry_client_utils.we_panel.func.name.sh1we"
 willTranslate = true
 command = "/shift 1 west"
 keybind = 263
-width = 56
+width = 64
 
 [[we_panel.item]]
 name = "gui.zry_client_utils.we_panel.func.name.sh1ea"
 willTranslate = true
 command = "/shift 1 east"
 keybind = 262
-width = 56
+width = 64
 
 [[we_panel.item]]
 name = "gui.zry_client_utils.we_panel.func.name.sh1up"
 willTranslate = true
 command = "/shift 1 up"
 keybind = 268
-width = 56
+width = 72
 
 [[we_panel.item]]
 name = "gui.zry_client_utils.we_panel.func.name.sh1dn"
 willTranslate = true
 command = "/shift 1 down"
 keybind = 269
-width = 56
+width = 72
 
 [[we_panel.item]]
 name = "gui.zry_client_utils.we_panel.func.name.ex1up"
@@ -263,6 +191,14 @@ willTranslate = true
 command = "/contract 1 east"
 keybind = 0
 width = 48
+
+[[we_panel.item]]
+name = "选区信息"
+willTranslate = false
+command = "get-we-sel-pos"
+keybind = 0
+width = 48
+clientCmd = true
 
 [[we_panel.item]]
 name = "gui.zry_client_utils.we_panel.func.name.ex1nor"
@@ -334,6 +270,78 @@ willTranslate = true
 command = "/move 1 down"
 keybind = 0
 width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.st1nor"
+willTranslate = true
+command = "/stack 1 north"
+keybind = 328
+width = 48
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.st1sou"
+willTranslate = true
+command = "/stack 1 south"
+keybind = 322
+width = 48
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.st1we"
+willTranslate = true
+command = "/stack 1 west"
+keybind = 324
+width = 48
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.st1ea"
+willTranslate = true
+command = "/stack 1 east"
+keybind = 326
+width = 48
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.st1up"
+willTranslate = true
+command = "/stack 1 up"
+keybind = 332
+width = 48
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.st1dn"
+willTranslate = true
+command = "/stack 1 down"
+keybind = 331
+width = 48
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.tomark"
+willTranslate = true
+command = "zcu-marker from-we"
+keybind = 77
+width = 56
+clientCmd = true
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.clmark"
+willTranslate = true
+command = "zcu-marker clear"
+keybind = 78
+width = 56
+clientCmd = true
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.outset"
+willTranslate = true
+command = "/outset 1"
+keybind = 334
+width = 72
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.inset"
+willTranslate = true
+command = "/inset 1"
+keybind = 333
+width = 72
 
 # Appendix A: Key Code Reference
 #GLFW_KEY_SPACE         = 32,
