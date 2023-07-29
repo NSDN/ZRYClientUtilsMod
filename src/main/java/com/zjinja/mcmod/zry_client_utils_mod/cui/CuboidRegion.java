@@ -66,7 +66,13 @@ public class CuboidRegion extends EmptyRegion {
         AABB aabbMain = new AABB(aX, aY, aZ, bX, bY, bZ);
         AABB aabbFP = new AABB(p1.x, p1.y, p1.z, p1.x + 1, p1.y + 1, p1.z + 1);
         AABB aabbSP = new AABB(p2.x, p2.y, p2.z, p2.x + 1, p2.y + 1, p2.z + 1);
-        RenderUtils.drawOutlineBox(rctx, aabbMain, new RGBA(0.0F, 0.0F, 1.0F, 1.0F));
+        RGBA mainBoxColor;
+        if(mainSelection){
+            mainBoxColor = new RGBA(0.0F, 1.0F, 1.0F, 1.0F);
+        }else {
+            mainBoxColor = new RGBA(0.0F, 0.0F, 1.0F, 1.0F);
+        }
+        RenderUtils.drawOutlineBox(rctx, aabbMain, mainBoxColor);
         RenderUtils.drawOutlineBox(rctx, aabbFP, new RGBA(1.0F, 0.0F, 0.0F, 1.0F));
         RenderUtils.drawOutlineBox(rctx, aabbSP, new RGBA(0.0F, 1.0F, 0.0F, 1.0F));
     }
