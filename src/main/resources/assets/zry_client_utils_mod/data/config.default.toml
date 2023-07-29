@@ -1,26 +1,48 @@
+# If one of field has default value, this
+# field can be omitted if the default value is used.
+# 如果一个字段有默认值，你可以省略不写，就会采用默认值。
+
 [log]
 # can be one of ["trace", "debug", "info", "warn", "error"]
 # default is "info"
+# 可以是 ["trace", "debug", "info", "warn", "error"] 之一
+# 默认是 "info"
 level = "info"
 
 [we_panel.gui]
 # the WE Panel default button width, default is 54
+# WE Panel的默认按钮宽度，默认值是54
 defaultButtonWidth = 54
 
 [[we_panel.item]]
 # the WE Panel button name
+# 按钮的名称，这个不可省略
 name = "gui.zry_client_utils.we_panel.func.name.desel"
 # if true, treat 'name' as translatable, false will treat it as literal
+# 如果是名称是字面量，填写false，如果需要经由I18N翻译，填写true
 willTranslate = true
 # command for this button. the first '/' is not needed.
 # for example, '/desel' will presented command '//desel'
+# 当前按钮对应的命令，命令最前面的'/'不用填入
+# 例如'//desel'只需要填入‘/desel’
 command = "/desel"
 # keybind for this button. if not need, set it to 0.
 # for details of key code, refer to Appendix A
+# 快捷键绑定，如果不需要快捷键，设为0
+# 关于按键代码，请看本配置文件最末尾的Appendix A（附录A）
 keybind = 68
 # width of this button.
 # if not specified, will use we_panel.gui.defaultButtonWidth
+# 按钮的宽度，若不指定则采用we_panel.gui.defaultButtonWidth指定的默认值
 width = 60
+# if the command is provided from client side, set this to true.
+# default is false. if you are not sure whether a command is
+# provided from, you can try to set it to false, if command
+# executed failed, you can change this to true and try again.
+# 如果该命令由客户端提供，则需要设为true
+# 如果该命令由服务端提供，则需要设为false（或者省略此字段）
+# 如果不确定命令由哪边提供，可以都试一下，成功了就行
+clientCmd = false
 
 [[we_panel.item]]
 name = "gui.zry_client_utils.we_panel.func.name.distr"
@@ -35,6 +57,283 @@ willTranslate = true
 command = "/set 0"
 keybind = 261
 width = 80
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.copy"
+willTranslate = true
+command = "/copy"
+keybind = 89
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.paste"
+willTranslate = true
+command = "/paste"
+keybind = 80
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.undo"
+willTranslate = true
+command = "/undo"
+keybind = 85
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.redo"
+willTranslate = true
+command = "/redo"
+keybind = 82
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.tomark"
+willTranslate = true
+command = "zcu-marker from-we"
+keybind = 77
+width = 80
+clientCmd = true
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.clmark"
+willTranslate = true
+command = "zcu-marker clear"
+keybind = 78
+width = 56
+clientCmd = true
+
+[[we_panel.item]]
+name = "/unstuck"
+willTranslate = false
+command = "unstuck"
+keybind = 61
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.outset"
+willTranslate = true
+command = "/outset 1"
+keybind = 334
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.inset"
+willTranslate = true
+command = "/inset 1"
+keybind = 333
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.st1nor"
+willTranslate = true
+command = "/stack 1 north"
+keybind = 328
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.st1sou"
+willTranslate = true
+command = "/stack 1 south"
+keybind = 322
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.st1we"
+willTranslate = true
+command = "/stack 1 west"
+keybind = 324
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.st1ea"
+willTranslate = true
+command = "/stack 1 east"
+keybind = 326
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.st1up"
+willTranslate = true
+command = "/stack 1 up"
+keybind = 332
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.st1dn"
+willTranslate = true
+command = "/stack 1 down"
+keybind = 331
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.sh1nor"
+willTranslate = true
+command = "/shift 1 north"
+keybind = 265
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.sh1sou"
+willTranslate = true
+command = "/shift 1 south"
+keybind = 264
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.sh1we"
+willTranslate = true
+command = "/shift 1 west"
+keybind = 263
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.sh1ea"
+willTranslate = true
+command = "/shift 1 east"
+keybind = 262
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.sh1u"
+willTranslate = true
+command = "/shift 1 up"
+keybind = 268
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.sh1d"
+willTranslate = true
+command = "/shift 1 down"
+keybind = 269
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.ex1u"
+willTranslate = true
+command = "/expand 1 up"
+keybind = 0
+width = 48
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.ex1d"
+willTranslate = true
+command = "/expand 1 down"
+keybind = 0
+width = 48
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.ct1u"
+willTranslate = true
+command = "/contract 1 up"
+keybind = 0
+width = 48
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.ct1d"
+willTranslate = true
+command = "/contract 1 down"
+keybind = 0
+width = 48
+
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.ex1we"
+willTranslate = true
+command = "/expand 1 west"
+keybind = 0
+width = 48
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.ex1ea"
+willTranslate = true
+command = "/expand 1 east"
+keybind = 0
+width = 48
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.ct1we"
+willTranslate = true
+command = "/contract 1 west"
+keybind = 0
+width = 48
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.ct1ea"
+willTranslate = true
+command = "/contract 1 east"
+keybind = 0
+width = 48
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.ex1nor"
+willTranslate = true
+command = "/expand 1 north"
+keybind = 0
+width = 48
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.ex1sou"
+willTranslate = true
+command = "/expand 1 south"
+keybind = 0
+width = 48
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.ct1nor"
+willTranslate = true
+command = "/contract 1 north"
+keybind = 0
+width = 48
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.ct1sou"
+willTranslate = true
+command = "/contract 1 south"
+keybind = 0
+width = 48
+
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.mv1nor"
+willTranslate = true
+command = "/move 1 north"
+keybind = 0
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.mv1sou"
+willTranslate = true
+command = "/move 1 south"
+keybind = 0
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.mv1we"
+willTranslate = true
+command = "/move 1 west"
+keybind = 0
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.mv1ea"
+willTranslate = true
+command = "/move 1 east"
+keybind = 0
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.mv1up"
+willTranslate = true
+command = "/move 1 up"
+keybind = 0
+width = 56
+
+[[we_panel.item]]
+name = "gui.zry_client_utils.we_panel.func.name.mv1dn"
+willTranslate = true
+command = "/move 1 down"
+keybind = 0
+width = 56
 
 # Appendix A: Key Code Reference
 #GLFW_KEY_SPACE         = 32,
