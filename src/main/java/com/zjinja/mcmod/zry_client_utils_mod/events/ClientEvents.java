@@ -4,10 +4,12 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.logging.LogUtils;
 import com.zjinja.mcmod.zry_client_utils_mod.ZRYClientUtilsMod;
 import com.zjinja.mcmod.zry_client_utils_mod.commands.CommandGetWESelPos;
+import com.zjinja.mcmod.zry_client_utils_mod.commands.CommandMarker;
 import com.zjinja.mcmod.zry_client_utils_mod.commands.CommandReloadConfig;
 import com.zjinja.mcmod.zry_client_utils_mod.cui.CUIRegionManager;
 import com.zjinja.mcmod.zry_client_utils_mod.gui.GuiWEHelpPanel;
 import com.zjinja.mcmod.zry_client_utils_mod.keybinds.KeyBindings;
+import com.zjinja.mcmod.zry_client_utils_mod.marker.MarkerMgr;
 import com.zjinja.mcmod.zry_client_utils_mod.networking.NetworkHandlerWECUI;
 import com.zjinja.mcmod.zry_client_utils_mod.renderer.RenderContext;
 import com.zjinja.mcmod.zry_client_utils_mod.utils.ConfigMgr;
@@ -48,6 +50,7 @@ public class ClientEvents {
         public static void registerClientCommand(RegisterClientCommandsEvent event) {
             new CommandGetWESelPos().register(event.getDispatcher());
             new CommandReloadConfig().register(event.getDispatcher());
+            new CommandMarker().register(event.getDispatcher());
         }
 
         @SubscribeEvent
@@ -77,7 +80,7 @@ public class ClientEvents {
                 Frustum fr = event.getFrustum();
                 RenderContext rctx = new RenderContext(ps, fr);
                 CUIRegionManager.render(rctx);
-                //MarkerMgr.render(rctx);
+                MarkerMgr.render(rctx);
             }
         }
 
