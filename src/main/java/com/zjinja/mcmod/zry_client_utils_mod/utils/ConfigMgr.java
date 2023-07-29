@@ -21,6 +21,7 @@ public class ConfigMgr {
         public String Name;
         public boolean WillTranslate;
         public String Command;
+        public boolean IsClientCommand;
         public int KeyCode;
         public int Width;
 
@@ -30,6 +31,16 @@ public class ConfigMgr {
             this.Command = command;
             this.KeyCode = keycode;
             this.Width = width;
+            this.IsClientCommand = false;
+        }
+
+        public WEPanelFunctionItem(String name, boolean willTranslate, String command, int keycode, int width, boolean isClientCommand) {
+            this.Name = name;
+            this.WillTranslate = willTranslate;
+            this.Command = command;
+            this.KeyCode = keycode;
+            this.Width = width;
+            this.IsClientCommand = isClientCommand;
         }
     }
 
@@ -206,7 +217,8 @@ public class ConfigMgr {
             if(keyBind <= 0) {
                 keyBind = this.WEPanelFunctionDefaultButtonWidth;
             }
-            WEPanelFunctionItem pfi = new WEPanelFunctionItem(name, willTranslate, command, keyBind, width);
+            Boolean isClientCommand = i.getOrElse("clientCmd", false);
+            WEPanelFunctionItem pfi = new WEPanelFunctionItem(name, willTranslate, command, keyBind, width, isClientCommand);
             this.WEPanelFunctionList.add(pfi);
         }
     }

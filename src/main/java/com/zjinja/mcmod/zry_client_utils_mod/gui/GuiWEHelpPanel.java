@@ -11,6 +11,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraftforge.client.ClientCommandHandler;
 import org.lwjgl.glfw.GLFW;
 import java.util.HashMap;
 
@@ -110,7 +111,7 @@ public class GuiWEHelpPanel extends Screen {
                     20,
                     backText,
                     button -> {
-                        issueCmd(i.Command);
+                        issueCmd(i.Command, i.IsClientCommand);
                     },
                     (button, poseStack, n1, n2) -> {
 
@@ -126,7 +127,35 @@ public class GuiWEHelpPanel extends Screen {
 
     public void issueCmd(String cmd) {
         if (Minecraft.getInstance().player != null) {
-            Minecraft.getInstance().player.commandUnsigned(cmd);
+            var ok = Minecraft.getInstance().player.commandUnsigned(cmd);
+            if(!ok) {
+                var sm = Component.translatable("chat.tip.cmd_failed");
+                Minecraft.getInstance().player.sendSystemMessage(sm);
+            }
+        }else{
+            ZLogUtil.log(
+                    LogUtils.getLogger(), ZLogUtil.Level.WARN,
+                    "gui/we-panel", "player is null."
+            );
+        }
+    }
+
+    public void issueCmd(String cmd, boolean isClientCommand) {
+        if(isClientCommand) {
+            boolean ok = ClientCommandHandler.runCommand(cmd);
+            if(!ok) {
+                if (Minecraft.getInstance().player != null) {
+                    var sm = Component.translatable("chat.tip.cmd_failed");
+                    Minecraft.getInstance().player.sendSystemMessage(sm);
+                }else{
+                    ZLogUtil.log(
+                            LogUtils.getLogger(), ZLogUtil.Level.WARN,
+                            "gui/we-panel", "player is null."
+                    );
+                }
+            }
+        }else{
+            issueCmd(cmd);
         }
     }
 

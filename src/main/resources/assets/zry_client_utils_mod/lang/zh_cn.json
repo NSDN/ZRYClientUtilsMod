@@ -13,6 +13,7 @@
     "chat.tip.marker_from_we_ok": "[ZRYClientUtilsMod] 标记已从WE选区添加。",
     "chat.tip.marker_from_we_fail": "[ZRYClientUtilsMod] 标记添加失败：没有有效的WE选区。",
     "chat.tip.marker_from_we_err": "[ZRYClientUtilsMod] 标记添加失败：内部错误。",
+    "chat.tip.cmd_failed": "[ZRYClientUtilsMod] 命令执行失败。",
     "gui.zry_client_utils.we_panel.title": "WE助手",
     "gui.zry_client_utils.we_panel.back": "返回",
     "gui.zry_client_utils.we_panel.func.name.distr": "选区统计",
