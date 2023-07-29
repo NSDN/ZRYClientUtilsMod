@@ -38,6 +38,7 @@ public class RenderUtils {
     }
 
     public static void drawOutlineBox(RenderContext rctx, AABB aabb, RGBA color) {
+        if(!rctx.getFrustum().isVisible(aabb)) return;
         MultiBufferSource.BufferSource buffer = Minecraft.getInstance().renderBuffers().bufferSource();
         VertexConsumer builder = buffer.getBuffer(RenderType.lines());
         VoxelShape vsp = Shapes.create(aabb);
