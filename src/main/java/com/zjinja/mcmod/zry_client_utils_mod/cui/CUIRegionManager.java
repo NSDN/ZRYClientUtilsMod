@@ -6,8 +6,10 @@ import com.zjinja.mcmod.zry_client_utils_mod.renderer.RenderContext;
 import com.zjinja.mcmod.zry_client_utils_mod.utils.ZLogUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.phys.AABB;
 
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.UUID;
 
 public class CUIRegionManager {
@@ -319,6 +321,18 @@ public class CUIRegionManager {
             return "empty";
         }
         return this.selRegion.describe();
+    }
+
+    public Optional<AABB> getSelectionAABB() {
+        IRegion ir = this.selRegion;
+        if(ir == null){
+            return Optional.empty();
+        }
+        if(ir instanceof CuboidRegion cr) {
+            return cr.getRegionAABB();
+        }else{
+            return Optional.empty();
+        }
     }
 
     private boolean checkArgsCount(String[] params, int min, int max, String mtype) {

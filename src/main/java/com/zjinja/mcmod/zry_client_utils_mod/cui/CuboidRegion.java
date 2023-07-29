@@ -50,6 +50,22 @@ public class CuboidRegion extends EmptyRegion {
         }
     }
 
+    public Optional<AABB> getRegionAABB() {
+        if(this.point1.isEmpty() || this.point2.isEmpty()) {
+            return Optional.empty();
+        }
+        Vec3 p1 = this.point1.get();
+        Vec3 p2 = this.point2.get();
+        double aX = Math.min(p1.x, p2.x);
+        double bX = Math.max(p1.x, p2.x) + 1;
+        double aY = Math.min(p1.y, p2.y);
+        double bY = Math.max(p1.y, p2.y) + 1;
+        double aZ = Math.min(p1.z, p2.z);
+        double bZ = Math.max(p1.z, p2.z) + 1;
+        AABB aabbMain = new AABB(aX, aY, aZ, bX, bY, bZ);
+        return Optional.of(aabbMain);
+    }
+
     @Override
     public void render(RenderContext rctx, boolean mainSelection) {
         if(this.point1.isEmpty() || this.point2.isEmpty()) {

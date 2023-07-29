@@ -54,6 +54,10 @@ public class CommandMarker {
                         literal("clear")
                                 .executes(CommandMarker::cmdClear)
                 )
+                .then(
+                        literal("from-we")
+                                .executes(CommandMarker::fromWE)
+                )
                 .executes(CommandMarker::invalidArgs);
 
 
@@ -124,6 +128,29 @@ public class CommandMarker {
         MarkerMgr mm = MarkerMgr.getInstance();
         if(mm != null) mm.clearMarkerList();
         player.sendSystemMessage(Component.translatable("chat.tip.marker_cleared"));
+        return Command.SINGLE_SUCCESS;
+    }
+
+    private static int fromWE(final CommandContext<CommandSourceStack> context) {
+        Player player = Minecraft.getInstance().player;
+        if(player == null){
+            ZLogUtil.log(
+                    LogUtils.getLogger(), ZLogUtil.Level.WARN,
+                    "cmd/zcu-marker", "player is null"
+            );
+            return Command.SINGLE_SUCCESS;
+        }
+        MarkerMgr mm = MarkerMgr.getInstance();
+        if(mm == null) {
+            player.sendSystemMessage(Component.translatable("chat.tip.marker_from_we_err"));
+            return Command.SINGLE_SUCCESS;
+        }
+        boolean res = mm.addRangeFromWE();
+        if (res) {
+            player.sendSystemMessage(Component.translatable("chat.tip.marker_from_we_ok"));
+        }else {
+            player.sendSystemMessage(Component.translatable("chat.tip.marker_from_we_fail"));
+        }
         return Command.SINGLE_SUCCESS;
     }
 }
