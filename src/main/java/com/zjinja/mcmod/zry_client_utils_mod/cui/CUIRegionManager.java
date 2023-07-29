@@ -350,13 +350,13 @@ public class CUIRegionManager {
     public static void render(RenderContext rctx) {
         var inst = getInstance();
         if (inst != null) {
-            if(inst.selRegion != null) {
-                inst.selRegion.render(rctx, true);
-            }
             if (inst.regions != null) {
                 for (IRegion ir : inst.regions.values()) {
                     ir.render(rctx, false);
                 }
+            }
+            if(inst.selRegion != null) {
+                inst.selRegion.render(rctx, true);
             }
         }
     }
