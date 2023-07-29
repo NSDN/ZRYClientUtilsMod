@@ -20,8 +20,6 @@ public class GuiWEHelpPanel extends Screen {
     private int functionAreaMaxX;
     private int functionAreaMaxY;
 
-    private final String funcListJsonUri = "data/we_panel_func.json";
-
     private int exitKeyCode = GLFW.GLFW_KEY_V;
 
     public GuiWEHelpPanel() {

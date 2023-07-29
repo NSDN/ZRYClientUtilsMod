@@ -75,7 +75,6 @@ public class ClientEvents {
         public static void onRenderLevel(RenderLevelStageEvent event) {
             //if(event.getStage().equals(RenderLevelStageEvent.Stage.AFTER_CUTOUT_MIPPED_BLOCKS_BLOCKS)) {
             if(true) {
-                LevelRenderer lr = event.getLevelRenderer();
                 PoseStack ps = event.getPoseStack();
                 Frustum fr = event.getFrustum();
                 RenderContext rctx = new RenderContext(ps, fr);

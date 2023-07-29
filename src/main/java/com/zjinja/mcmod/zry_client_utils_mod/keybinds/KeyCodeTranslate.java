@@ -1,6 +1,5 @@
 package com.zjinja.mcmod.zry_client_utils_mod.keybinds;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class KeyCodeTranslate {

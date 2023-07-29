@@ -16,7 +16,7 @@ public class MarkerMgr {
         return INSTANCE;
     }
 
-    private ArrayList<AABB> markerList = new ArrayList<>();
+    private final ArrayList<AABB> markerList = new ArrayList<>();
 
     public MarkerMgr() {
 

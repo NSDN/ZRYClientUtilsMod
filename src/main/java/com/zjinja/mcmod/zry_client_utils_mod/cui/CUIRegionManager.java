@@ -1,6 +1,5 @@
 package com.zjinja.mcmod.zry_client_utils_mod.cui;
 
-import com.mojang.brigadier.Command;
 import com.mojang.logging.LogUtils;
 import com.zjinja.mcmod.zry_client_utils_mod.renderer.RenderContext;
 import com.zjinja.mcmod.zry_client_utils_mod.utils.ZLogUtil;
@@ -16,7 +15,7 @@ public class CUIRegionManager {
     private static final CUIRegionManager INSTANCE = new CUIRegionManager();
 
     private IRegion selRegion = new EmptyRegion();
-    private HashMap<UUID, IRegion> regions = new HashMap<>();
+    private final HashMap<UUID, IRegion> regions = new HashMap<>();
     private IRegion activeRegion = new EmptyRegion();
 
     public enum RegionType {
